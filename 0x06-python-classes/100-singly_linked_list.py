@@ -71,4 +71,3 @@ class SinglyLinkedList:
             else:
                 newNode = Node(value, curr)
                 prev.next_node = newNode
-                
