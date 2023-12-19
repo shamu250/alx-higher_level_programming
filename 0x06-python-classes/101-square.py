@@ -1,70 +1,75 @@
 #!/usr/bin/python3
-"""
-This is the "Square"  module.
 
-This module provides a simple Square class with initialize size.
-Defaults size to 0. Raise error on invalid size inputs.
-Attribute position which takes a default (0, 0) tuple.
-Methods Getter and Setter properties for size and position.
-Method area returns size of area of the square.
-Method my_print prints the square using "#", moved over left and top using
-position tuple.
-Method __repr__ should return the string to print out the square.
-"""
+class SinglyLinkedList:
+    ''' class SinglyLinkedList '''
 
+    def __init__(self):
+        self.__head = None
 
-class Square:
-    """A class that defines a square by size, which defaults 0.
-    Also defines position using a tuple, which defaults (0, 0).
-    Square can also get area, and print square using '#'.
-    When printing, using position, offset on top and left.
-    """
-    def __init__(self, size=0, position=(0, 0)):
-        self.size = size
-        self.position = position
+    def __str__(self):
+        ''' string representation of Singly Linked List '''
+        tmp = self.__head
+        while tmp is not None:
+            print(type(tmp), end='')
+            print(tmp)
+            tmp = tmp.next_node
+
+    def sorted_insert(self, value):
+        ''' insert new node at proper position
+        (sorted) ascending order '''
+        self.__head.append(Node(value))
+
+    def insert_at_end(self, value):
+        ''' insert at end of SLL '''
+        if self.__head is None:
+            self.__head = Node(value)
+            print("first insert {}".format(self.__head))
+        else:
+            print("InAtEnd=======")
+            tmp = self.__head
+            print("----ID{}".format(id(tmp)))
+            while(tmp.next_node is not None):
+                tmp = tmp.next_node
+                print("+++++ID{}".format(id(tmp)))
+            print("what is value --> {}".format(str(value)))
+            # tmp.next_node = Node(value)
+            tmp = Node(value)
+            print("jus before end - {}".format(tmp))
+            # print("NODEatEND-> {}".format(tmp.next_node))
+
+class Node:
+    '''Hello from class Node'''
+
+    def __init__(self, data, next_node=None):
+        '''init instance of Node class'''
+        self.data = data
+        self.next_node = next_node
+
+    def __str__(self):
+        '''print a node instance '''
+        print(self.__data)
 
     @property
-    def size(self):
-        return self.__size
-
-    @size.setter
-    def size(self, size):
-        if type(size) != int:
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = size
+    def data(self):
+        ''' hello! '''
+        return self.__data
+        
+    @data.setter
+    def data(self, value):
+        '''data setter'''
+        if type(value) != int:
+            raise TypeError("data must be an integer")
+        self.__data = value
 
     @property
-    def position(self):
-        return self.__position
+    def next_node(self):
+        '''hello! from next_node getter '''
+        return self.__next_node
 
-    @position.setter
-    def position(self, value):
-        if type(value) != tuple or len(value) != 2 or \
-           not all([type(i) == int for i in value]):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = value
-
-    def __repr__(self):
-        return (self.get_str())
-
-    def area(self):
-        return self.__size * self.__size
-
-    def get_str(self):
-        total = ""
-        if self.__size is 0:
-            total += "\n"
-            return total
-        for i in range(self.__position[1]):
-            total += "\n"
-        for i in range(self.__size):
-            total += (" " * self.__position[0])
-            total += ("#" * self.__size)
-            if i is not (self.__size - 1):
-                total += "\n"
-        return total
-
-    def my_print(self):
-        print(self.get_str())
+    @next_node.setter
+    def next_node(self, next_node):
+        '''next node setter'''
+        if not(next_node is None or type(next_node) == Node):
+            raise TypeError("next_node must be a Node object")
+        self.__next_node = next_node
+        
