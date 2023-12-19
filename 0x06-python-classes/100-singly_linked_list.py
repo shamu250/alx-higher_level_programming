@@ -72,4 +72,3 @@ class Node:
         if not(next_node is None or type(next_node) == Node):
             raise TypeError("next_node must be a Node object")
         self.__next_node = next_node
-        
