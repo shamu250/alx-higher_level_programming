@@ -12,3 +12,6 @@
 9.  Write a class Rectangle that inherits from BaseGeometry (7-base_geometry.py). (task based on 8-rectangle.py).
 10. Write a class Square that inherits from Rectangle (9-rectangle.py).
 11. Write a class Square that inherits from Rectangle (9-rectangle.py). (task based on 10-square.py).
+
+100.    Write a class MyInt that inherits from int.
+101.    Write a function that adds a new attribute to an object if it’s possible.
