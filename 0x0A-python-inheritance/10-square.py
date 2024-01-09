@@ -68,3 +68,4 @@ class Square(Rectangle):
         '''method: area
         '''
         return self._size ** 2
+    
