@@ -1,92 +1,52 @@
-The ``Base Geometry`` module
-============================
+0x0A-python-inheritance/7-base_geometry.txt module
+====================
 
-Using ``BaseGeometry``
-----------------------
+Importing the class from the module:
+        >>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
 
-This is an example text file in reStructuredText format.
-First import ``BaseGeometry`` from the ``7-base_geometry`` module:
+Checking for module docstring:
+        >>> m = __import__("7-base_geometry").__doc__
+        >>> len(m) > 1
+        True
 
-    >>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+Checking for class docstring:
+        >>> c = __import__("7-base_geometry").BaseGeometry.__doc__
+        >>> len(c) > 1
+        True
 
-Now use it:
+Checking for __init__ method docstring
+        >>> f = __import__("7-base_geometry").BaseGeometry.__init__.__doc__
+        >>> len(f) > 1
+        True
 
-    >>> bg = BaseGeometry()
-    >>> type(bg)
-    <class '7-base_geometry.BaseGeometry'>
+Checking for area method docstring
+        >>> f = __import__("7-base_geometry").BaseGeometry.area.__doc__
+        >>> len(f) > 1
+        True
 
+Checking for integer_validator method docstring
+        >>> f = __import__("7-base_geometry").BaseGeometry.integer_validator.__doc__
+        >>> len(f) > 1
+        True
 
-This class should define 2 functions
+Checking given test case
+        >>> bg = BaseGeometry()
 
-``area``
-    >>> 'area' in dir(BaseGeometry)
-    True
+        >>> bg.integer_validator("my_int", 12)
 
-``integer_validator``
-    >>> 'integer_validator' in dir(BaseGeometry)
-    True
+        >>> bg.integer_validator("width", 89)
 
-Should test publicity of methods ?
+        >>> bg.integer_validator("name", "John")
+        Traceback (most recent call last):
+            ...
+        TypeError: name must be an integer
 
-And no instance attributes or methods
-    >>> dir(bg) == dir(BaseGeometry)
-    True
+        >>> bg.integer_validator("age", 0)
+        Traceback (most recent call last):
+            ...
+        ValueError: age must be greater than 0
 
-Test ``area``
--------------
-It is not implemented
-    >>> bg.area()
-    Traceback (most recent call last):
-    Exception: area() is not implemented
-
-Test ``integer_validator``
---------------------------
-Integer takes in 2 arguments
-
-    >>> bg.integer_validator()
-    Traceback (most recent call last):
-    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
-
-    >>> bg.integer_validator(1)
-    Traceback (most recent call last):
-    TypeError: integer_validator() missing 1 required positional argument: 'value'
-
-    >>> bg.integer_validator(1, 2, 3)
-    Traceback (most recent call last):
-    TypeError: integer_validator() takes 3 positional arguments but 4 were given
-
-
-Test for type
-     >>> def test_i(tests=[]):
-     ...     for test in tests:
-     ...         try:
-     ...	     bg.integer_validator("name", test)
-     ...       	 except Exception as e:
-     ...      	     print("[{}] {} for type {}".format(e.__class__.__name__, e, type(test)))
-
-     >>> tests = [True, 1.24, -76.87, set(), [1, 2], "a string", {"a":1}, ("11", 3), test_i, bg, BaseGeometry, None]
-     >>> test_i(tests)
-     [TypeError] name must be an integer for type <class 'bool'>
-     [TypeError] name must be an integer for type <class 'float'>
-     [TypeError] name must be an integer for type <class 'float'>
-     [TypeError] name must be an integer for type <class 'set'>
-     [TypeError] name must be an integer for type <class 'list'>
-     [TypeError] name must be an integer for type <class 'str'>
-     [TypeError] name must be an integer for type <class 'dict'>
-     [TypeError] name must be an integer for type <class 'tuple'>
-     [TypeError] name must be an integer for type <class 'function'>
-     [TypeError] name must be an integer for type <class '7-base_geometry.BaseGeometry'>
-     [TypeError] name must be an integer for type <class 'type'>
-     [TypeError] name must be an integer for type <class 'NoneType'>
-
-Test for sign
-     >>> bg.integer_validator("name", -23)
-     Traceback (most recent call last):
-     ValueError: name must be greater than 0
-
-     >>> bg.integer_validator("name", 0)
-     Traceback (most recent call last):
-     ValueError: name must be greater than 0
-
-When it works it does not return anything
-     >>> bg.integer_validator("name", 3)
+       	>>> bg.integer_validator("distance", -4)
+        Traceback (most recent call last):
+            ...
+        ValueError: distance must be greater than 0
