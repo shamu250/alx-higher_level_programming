@@ -4,8 +4,4 @@
 
 
 def lookup(obj):
-    ''' function: lookup()
-    obj: an object
-    returns a list of attribute of "obj"
-    '''
     return dir(obj)
