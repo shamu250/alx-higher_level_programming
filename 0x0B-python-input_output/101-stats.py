@@ -3,7 +3,6 @@
 '''
 
 
-import signal
 import sys
 
 def print_stats(total_size, status_codes):
@@ -14,30 +13,33 @@ def print_stats(total_size, status_codes):
     for code in sorted(status_codes):
         print("{:d}: {:d}".format(code, status_codes[code]))
 
-def signal_handler(sig, frame):
-    """
-    Signal handler for keyboard interruption (CTRL + C).
-    """
-    print_stats(total_size, status_codes)
-    sys.exit(0)
+def main():
+    total_size = 0
+    status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+    count = 0
 
-signal.signal(signal.SIGINT, signal_handler)
+    try:
+        for line in sys.stdin:
+            try:
+                parts = line.split(" ")
+                size = int(parts[-1])
+                status_code = int(parts[-2])
 
-total_size = 0
-status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+                total_size += size
 
-try:
-    for line_num, line in enumerate(sys.stdin, 1):
-        data = line.split()
-        if len(data) >= 8:
-            total_size += int(data[-1])
-            status_code = int(data[-2])
-            if status_code in status_codes:
-                status_codes[status_code] += 1
+                if status_code in status_codes:
+                    status_codes[status_code] += 1
 
-        if line_num % 10 == 0:
-            print_stats(total_size, status_codes)
+                count += 1
 
-except KeyboardInterrupt:
-    print_stats(total_size, status_codes)
-    raise
+                if count % 10 == 0:
+                    print_stats(total_size, status_codes)
+
+            except (ValueError, IndexError):
+                pass
+
+    except KeyboardInterrupt:
+        print_stats(total_size, status_codes)
+
+if __name__ == "__main__":
+    main()
