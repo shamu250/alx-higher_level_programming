@@ -1,5 +1,13 @@
 #!/usr/bin/python3
+''' module: 0-read_file
+'''
+
+
 def read_file(filename=""):
-    with open(filename, encoding="utf-8") as fd:
-        for line in fd:
-            print(line, end="")
+    ''' function: read_file
+    '''
+    if filename == "" or type(filename) is not str:
+        return
+    with open(filename, 'r') as f:
+        for line in f:
+            print(line, end='')
