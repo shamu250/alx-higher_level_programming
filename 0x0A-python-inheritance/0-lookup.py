@@ -2,7 +2,6 @@
 ''' module: 0-lookup
 '''
 
-
 def lookup(obj):
     ''' function: lookup()
     obj: an object
